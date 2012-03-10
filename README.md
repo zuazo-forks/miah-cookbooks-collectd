@@ -1,3 +1,8 @@
+# REASON FOR FORK #
+
+I Forked this cookbook to faciliate a function: Collectd writing to graphite monitoring redis and haproxy.  Your milage may vary.
+
+
 # DESCRIPTION #
 
 Configure and install the [collectd](http://collectd.org/) monitoring daemon.
@@ -10,23 +15,24 @@ To use the `collectd::collectd_web` recipe you need the [apache2](https://github
 
 The [collectd_plugins](#) cookbook is not required, but provides many common plugin definitions for easy reuse.
 
+# REASON FOR THIS FORK #
+
+* This cookbook brings in collectd from [master][1] to provide the ability to write to graphite.  RRD is disabled by default as that is the whole point of this cookbook.
+
+
 # ATTRIBUTES #
 
 * collectd.basedir - Base folder for collectd output data.
 * collectd.plugin_dir - Base folder to find plugins.
 * collectd.types_db - Array of files to read graph type information from.
 * collectd.interval - Time period in seconds to wait between data reads.
-
-* collectd.collectd_web.path - Location to install collectd_web to. Defaults to /srv/collectd_web.
-* collectd.collectd_web.hostname - Server name to use for collectd_web Apache site.
+* collectd.graphite_url - Endpoint for Graphite.  **Must** be defined for [usage][2].
 
 # USAGE #
 
-Three main recipes are provided:
+one recipe is provided:
 
 * collectd - Install a standalone daemon.
-* collectd::client - Install collectd and configure it to send data to a server.
-* collectd::server - Install collectd and configure it to recieve data from clients.
 
 The client recipe will use the search index to automatically locate the server hosts, so no manual configuration is required.
 
@@ -76,8 +82,10 @@ component, so be sure to configure the node with the correct recipes.
 
 # LICENSE & AUTHOR #
 
+Author:: Scott M. Likens (<scott@likens.us>)
 Author:: Noah Kantrowitz (<noah@coderanger.net>)
-Copyright:: 2010, Atari, Inc
+Copyright:: 2012, Scott M. Likens
+copyright:: 2010, Atari, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -90,3 +98,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+[1]: https://github.com/collectd/collectd
+[2]: https://github.com/damm/chef-collectd/tree/master/attributes/default.rb
