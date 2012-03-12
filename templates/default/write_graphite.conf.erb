@@ -8,6 +8,6 @@ LoadPlugin "write_graphite"
     Postfix "<%= @postfix %>"
     StoreRates <%= @storerates %>
     AlwaysAppendDS <%= @alwaysappendds %>
-    EscapeCharacter "_"
+    EscapeCharacter "<%= @escapecharacter %>"
   </Carbon>
 </Plugin>
