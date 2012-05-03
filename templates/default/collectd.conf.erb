@@ -14,14 +14,10 @@ TypesDB "<%= @node[:collectd][:types_db].join('", "') %>"
 Interval <%= @node[:collectd][:interval] %>
 ReadThreads <%= @node[:collectd][:read_threads] %>
 
-Include "<%= @plugindir %>/*.conf"
-Include "<%= @prefix %>/etc/thresholds.conf"
+Include "/etc/collectd.d/*.conf" 
 LoadPlugin "cpu"
 LoadPlugin "disk"
-LoadPlugin "df"
-LoadPlugin "entropy"
 LoadPlugin "load"
 LoadPlugin "memory"
 LoadPlugin "swap"
-LoadPlugin "vmem"
-LoadPlugin "haproxy"
+LoadPlugin "interface"

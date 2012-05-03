@@ -4,10 +4,10 @@ LoadPlugin "write_graphite"
   <Carbon>
     Host "<%= @host %>"
     Port "<%= @port %>"
-    Prefix "<%= @prefix %>"
-    Postfix "<%= @postfix %>"
+    Prefix ""
+    Postfix ""
     StoreRates <%= @storerates %>
     AlwaysAppendDS <%= @alwaysappendds %>
-    EscapeCharacter "<%= @escapecharacter %>"
+    EscapeCharacter "_"
   </Carbon>
 </Plugin>

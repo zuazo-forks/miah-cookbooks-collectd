@@ -1,6 +1,9 @@
 # REASON FOR FORK #
+I Forked this cookbook to faciliate a function: Collectd writing to graphite monitoring.  Your milage may vary.
 
-I Forked this cookbook to faciliate a function: Collectd writing to graphite monitoring redis and haproxy.  Your milage may vary.
+# CHANGELOG #
+- 1.0.2 - Update to 5.1.0 with a debian package
+- 1.0.1 - Use master to make write_graphite work
 
 
 # DESCRIPTION #
