@@ -28,6 +28,9 @@ default[:collectd][:collectd_web][:hostname] = "collectd"
 
 ### 
 default['collectd']['version'] = "5.1.0"
-default['collectd']['tarball'] = "collectd-5.1.0.tar.gz"
-default['collectd']['source_url'] = "http://collectd.org/files/collectd-5.1.0.tar.gz"
-default['collectd']['source_directory'] = "/tmp/collectd/"
+default['collectd']['source_url'] = "http://collectd.org/files/"
+default['collectd']['checksum'] = "6d38d6dfb6701c349c669f5943463187"
+default['collectd']['source_directory'] = "/tmp/collectd"
+default['collectd']['root_directory'] = "/var/lib/collectd"
+default['collectd']['home_directory'] = "/var/lib/collectd"
+default['collectd']['bin_directory'] = "/var/lib/collectd"
