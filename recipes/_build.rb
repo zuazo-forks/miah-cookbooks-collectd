@@ -3,9 +3,9 @@
 # build and install collectd and use alternave values for
 # prefix_root, prefix_home, and prefix_bin
 
-
-# apt-get install librrd2-dev libsensors-dev libsnmp-dev ...
-
+%w(librrd2-dev libsensors-dev libsnmp-dev).each do |req|
+	resource req
+end
 
 tar_source_url = "#{node['collectd']['source_url_prefix']}#{node['collectd']['source_url_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
 
