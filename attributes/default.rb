@@ -1,4 +1,4 @@
-#
+
 # Cookbook Name:: collectd
 # Attributes:: default
 #
@@ -25,3 +25,9 @@ default[:collectd][:read_threads] = 5
 
 default[:collectd][:collectd_web][:path] = "/srv/collectd_web"
 default[:collectd][:collectd_web][:hostname] = "collectd"
+
+### 
+default['collectd']['version'] = "5.1.0"
+default['collectd']['tarball'] = "collectd-5.1.0.tar.gz"
+default['collectd']['source_url'] = "http://collectd.org/files/collectd-5.1.0.tar.gz"
+default['collectd']['source_directory'] = "/tmp/collectd/"
