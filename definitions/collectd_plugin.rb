@@ -2,8 +2,6 @@
 # Cookbook Name:: collectd
 # Definition:: collectd_plugin
 #
-# Copyright 2010, Atari, Inc
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -18,10 +16,10 @@
 #
 
 define :collectd_plugin, :options => {}, :template => nil, :cookbook => nil do
-  template "/etc/collectd/plugins/#{params[:name]}.conf" do
+  template "#{node['collectd']['plugconf_dir']}/#{params[:name]}.conf" do
     owner "root"
     group "root"
-    mode "644"
+    mode 0644
     if params[:template].blank?
       source "plugin.conf.erb"
       cookbook params[:cookbook] || "collectd"
@@ -30,13 +28,13 @@ define :collectd_plugin, :options => {}, :template => nil, :cookbook => nil do
       cookbook params[:cookbook]
     end
     variables :name=>params[:name], :options=>params[:options]
-    notifies :restart, resources(:service => "collectd")
+    notifies :restart, "service[collectd]"
   end
 end
 
 define :collectd_python_plugin, :options => {}, :module => nil, :path => nil do
   begin
-    t = resources(:template => "/etc/collectd/plugins/python.conf")
+    t = resources(:template => "#{node['collectd']['plugconf_dir']}/python.conf")
   rescue ArgumentError
     collectd_plugin "python" do
       options :paths=>[node['collectd']['plugin_dir']], :modules=>{}
