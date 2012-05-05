@@ -2,8 +2,6 @@
 # Cookbook Name:: collectd
 # Recipe:: client
 #
-# Copyright 2010, Atari, Inc
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -24,13 +22,13 @@ servers = []
 if Chef::Config[:solo]
   Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
 else
-	search(:node, 'recipes:"collectd\:\:server"') do |n|
+	search(:node, "role:#{node['collectd']['server_role']} AND #{node.chef_environment}") do |n|
   		servers << n['fqdn']
 	end
 end
 
 if servers.empty?
-  raise "No servers found. Please configure at least one node with collectd::server."
+  raise "No collectd servers found! Please configure at least one node with role: \"#{node['collectd']['server_role']}\" in environment: \"#{node.chef_environment}\"."
 end
 
 collectd_plugin "network" do
