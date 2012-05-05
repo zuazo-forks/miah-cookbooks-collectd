@@ -7,7 +7,7 @@
 	package req
 end
 
-tar_source_url = "#{node['collectd']['source_url_prefix']}#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
+tar_source_url = "#{node['collectd']['source_url_prefix']}/#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
 
  ark "collectd" do
    url tar_source_url
