@@ -29,9 +29,6 @@ else
 	end
 end
 
-
-
-
 if servers.empty?
   raise "No servers found. Please configure at least one node with collectd::server."
 end
