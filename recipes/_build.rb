@@ -4,7 +4,7 @@
 # prefix_root, prefix_home, and prefix_bin
 
 %w(librrd2-dev libsensors-dev libsnmp-dev).each do |req|
-	resource req
+	package req
 end
 
 tar_source_url = "#{node['collectd']['source_url_prefix']}#{node['collectd']['source_url_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
