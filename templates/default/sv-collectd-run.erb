@@ -1,0 +1,3 @@
+#!/bin/sh
+ulimit -n 65536
+exec <%= @node['collectd']['sbin_dir'] %> -f -C <%= @node['collectd']['sysconf_dir'] %>/collectd.conf
