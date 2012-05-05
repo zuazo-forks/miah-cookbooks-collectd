@@ -1,8 +1,6 @@
-
+#
 # Cookbook Name:: collectd
 # Attributes:: default
-#
-# Copyright 2010, Atari, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,22 +15,20 @@
 # limitations under the License.
 #
 
-default['collectd']['base_dir'] = "/var/lib/collectd"
-default['collectd']['plugin_dir'] = "/usr/lib/collectd"
-default['collectd']['types_db'] = ['/usr/share/collectd/types.db']
 default['collectd']['interval'] = 10
 default['collectd']['read_threads'] = 5
-
-default['collectd']['collectd_web']['path'] = "/srv/collectd_web"
-default['collectd']['collectd_web']['hostname'] = "collectd"
-
-### 
 default['collectd']['version'] = "5.1.0"
+default['collectd']['fqdn_lookup'] = "false"
+default['collectd']['server_role'] = "collectd-server"
 default['collectd']['source_tar_name_prefix'] = "collectd-"
 default['collectd']['source_tar_name_extension'] = ".tar.gz"
 default['collectd']['source_url_prefix'] = "http://collectd.org/files/"
-default['collectd']['checksum'] = "6d38d6dfb6701c349c669f5943463187"
-default['collectd']['source_directory'] = "/tmp/collectd"
-default['collectd']['root_directory'] = "/var/lib/collectd"
-default['collectd']['home_directory'] = "/var/lib/collectd"
-default['collectd']['bin_directory'] = "/var/lib/collectd"
+default['collectd']['checksum'] = "521d4be7df5bc1124b7b9ea88227e95839a5f7c1b704a5bde0f60f058ec6eecb"
+default['collectd']['types_db'] = ['/opt/collectd/share/types.db']
+default['collectd']['prefix_dir'] = "/opt/collectd"
+default['collectd']['sysconf_dir'] = "/opt/collectd/etc"
+default['collectd']['plugconf_dir'] = "/opt/collectd/etc/plugins"
+default['collectd']['bin_dir'] = "/opt/collectd/bin"
+default['collectd']['sbin_dir'] = "/opt/collectd/sbin"
+default['collectd']['log_dir'] = "/opt/collectd/logs"
+default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
