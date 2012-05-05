@@ -1,7 +1,21 @@
+#
 # Cookbook Name:: collectd
-# Recipe:: _build
-# build and install collectd and use alternave values for
-# prefix_root, prefix_home, and prefix_bin
+# Recipe:: _install_from_source
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+include_recipe "build-essential"
 
 %w(librrd2-dev libsensors-dev libsnmp-dev).each do |req|
 	package req
@@ -9,12 +23,15 @@ end
 
 tar_source_url = "#{node['collectd']['source_url_prefix']}/#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
 
- ark "collectd" do
-   url tar_source_url
-   version node['collectd']['version']
-   checksum node['collectd']['checksum']
-   prefix_root node['collectd']['prefix_root']
-   prefix_home node['collectd']['prefix_home']
-   prefix_bin  node['collectd']['prefix_bin']
-   action :install_with_make
- end    
+ark "collectd" do
+ url tar_source_url
+ version node['collectd']['version']
+ checksum node['collectd']['checksum']
+ autoconf_opts [ 
+   "--prefix=#{node['collectd']['prefix_dir']}",
+   "--sysconfdir=#{node['collectd']['sysconf_dir']}",
+   "--bindir=#{node['collectd']['bin_dir']}",
+   "--enable-all-plugins"
+ ]
+ action :install_with_make
+end
