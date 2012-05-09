@@ -15,7 +15,9 @@
 # limitations under the License.
 #
 
-include_recipe "collectd"
+include_recipe "collectd::_install_from_source"
+include_recipe "collectd::_server_plugins"
+include_recipe "collectd::_server_runit"
 
 servers = []
 
