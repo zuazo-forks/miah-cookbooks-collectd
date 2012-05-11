@@ -17,8 +17,23 @@
 
 include_recipe "build-essential"
 
-%w(librrd2-dev libsensors-dev libsnmp-dev).each do |req|
-	package req
+user_packages = %w(librrd2-dev libsnmp-dev)
+unless node['collectd']['build_prereq_pkgs'].nil?
+  user_packages << node['collectd']['build_prereq_pkgs']
+end
+
+user_packages.each do |build_pkgs|
+  package build_pkgs
+end
+
+user_autoconf_options = [
+  "--prefix=#{node['collectd']['prefix_dir']}",
+  "--sysconfdir=#{node['collectd']['sysconf_dir']}",
+  "--bindir=#{node['collectd']['bin_dir']}"
+]
+
+unless node['collectd']['autoconf_opts'].nil?
+  user_autoconf_options << node['collectd']['autoconf_opts']
 end
 
 tar_source_url = "#{node['collectd']['source_url_prefix']}/#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{default['collectd']['source_tar_name_extension']}"
@@ -27,11 +42,6 @@ ark "collectd" do
  url tar_source_url
  version node['collectd']['version']
  checksum node['collectd']['checksum']
- autoconf_opts [ 
-   "--prefix=#{node['collectd']['prefix_dir']}",
-   "--sysconfdir=#{node['collectd']['sysconf_dir']}",
-   "--bindir=#{node['collectd']['bin_dir']}",
-   "--enable-all-plugins"
- ]
+ autoconf_opts user_autoconf_options
  action :install_with_make
 end
