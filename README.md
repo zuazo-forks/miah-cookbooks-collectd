@@ -67,6 +67,7 @@ end
 # LICENSE & AUTHOR #
 
 Author:: Miah Johnson (<miah@chia-pet.org>)
+Author:: Phillip Gentry (<phillip@cx.com>)
 Author:: Noah Kantrowitz (<noah@coderanger.net>)
 
 Licensed under the Apache License, Version 2.0 (the "License");
