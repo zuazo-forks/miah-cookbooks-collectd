@@ -6,8 +6,6 @@ Configure and install the [collectd](http://collectd.org/) monitoring daemon.
 
 This cookbook has only been tested on Ubuntu 10.04.
 
-To use the `collectd::collectd_web` recipe you need the [apache2](https://github.com/opscode/cookbooks/tree/master/apache2) cookbook.
-
 The [collectd_plugins](#) cookbook is not required, but provides many common plugin definitions for easy reuse.
 
 # ATTRIBUTES #
@@ -16,9 +14,6 @@ The [collectd_plugins](#) cookbook is not required, but provides many common plu
 * collectd.plugin_dir - Base folder to find plugins.
 * collectd.types_db - Array of files to read graph type information from.
 * collectd.interval - Time period in seconds to wait between data reads.
-
-* collectd.collectd_web.path - Location to install collectd_web to. Defaults to /srv/collectd_web.
-* collectd.collectd_web.hostname - Server name to use for collectd_web Apache site.
 
 # USAGE #
 
@@ -68,16 +63,11 @@ cookbook_file File.join(node[:collectd][:plugin_dir], "redis.py") do
 end
 ```
 
-## Web frontend ##
-
-The `collectd::collectd_web` recipe will automatically deploy the [collectd_web](https://github.com/httpdss/collectd-web) frontend using Apache. The 
-[apache2](https://github.com/opscode/cookbooks/tree/master/apache2) cookbook is required for this and is *not* included automatically as this is an optional
-component, so be sure to configure the node with the correct recipes.
 
 # LICENSE & AUTHOR #
 
+Author:: Miah Johnson (<miah@chia-pet.org>)
 Author:: Noah Kantrowitz (<noah@coderanger.net>)
-Copyright:: 2010, Atari, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
