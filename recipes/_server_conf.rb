@@ -20,6 +20,6 @@
     owner "root"
     group "root"
     mode 0644
-    notifies :restart, resources(:service => "collectd")
+    notifies :restart, resources(:service => "collectd"), :delayed
   end
 end
