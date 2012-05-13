@@ -25,7 +25,7 @@ servers = []
 if Chef::Config[:solo]
   Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
 else
-	search(:node, "role:#{node['graphite']['server_role']} AND #{node.chef_environment}") do |n|
+	search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
   		servers << n['fqdn']
 	end
 end
