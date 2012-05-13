@@ -35,7 +35,7 @@ if servers.empty?
 end
 
 collectd_plugin "write_graphite" do
-  options  { host: servers, storerates: "false" }
+  options  { :host => servers, :storerates => "false" }
   template "write_graphite.conf.erb"
   cookbook "collectd"
 end
