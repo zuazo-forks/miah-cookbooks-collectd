@@ -14,5 +14,5 @@ TypesDB "<%= @node['collectd']['types_db'].join('", "') %>"
 BaseDir "<%= @node['collectd']['prefix_dir'] %>"
 PluginDir "<%= @node['collectd']['plugin_dir'] %>"
 
-Include "<% @node['collectd']['plugconf_dir'] %>/*.conf"
-Include "<% @node['collectd']['sysconf_dir']%>/thresholds.conf"
+Include "<%= @node['collectd']['plugconf_dir'] %>/*.conf"
+Include "<%= @node['collectd']['sysconf_dir'] %>/thresholds.conf"
