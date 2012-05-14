@@ -40,10 +40,10 @@ end
 tar_source_url = "#{node['collectd']['source_url_prefix']}/#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{node['collectd']['source_tar_name_extension']}"
 
 ark "collectd" do
- url tar_source_url
- version node['collectd']['version']
- checksum node['collectd']['checksum']
- path node['collectd']['prefix_dir']
- autoconf_opts user_autoconf_options
- action [ :configure, :install_with_make ]
+  url tar_source_url
+  version node['collectd']['version']
+  checksum node['collectd']['checksum']
+  path node['collectd']['prefix_dir']
+  autoconf_opts user_autoconf_options
+  action [ :configure, :install_with_make ]
 end
