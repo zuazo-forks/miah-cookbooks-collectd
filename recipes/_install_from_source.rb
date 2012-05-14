@@ -45,6 +45,6 @@ ark "collectd" do
   checksum node['collectd']['checksum']
   autoconf_opts user_autoconf_options
   prefix_root node['collectd']['prefix_dir']
-  prefix node['collectd']['src_dir']
+  path node['collectd']['src_dir']
   action [ :configure, :install_with_make ]
 end
