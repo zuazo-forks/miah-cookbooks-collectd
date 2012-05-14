@@ -16,6 +16,7 @@
 #
 
 include_recipe "build-essential"
+include_recipe "ark"
 
 user_packages = %w(librrd2-dev libsnmp-dev)
 unless node['collectd']['build_prereq_pkgs'].nil?
