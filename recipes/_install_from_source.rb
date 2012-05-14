@@ -43,7 +43,7 @@ ark "collectd" do
   url tar_source_url
   version node['collectd']['version']
   checksum node['collectd']['checksum']
-  path node['collectd']['prefix_dir']
   autoconf_opts user_autoconf_options
+  prefix_root node['collectd']['prefix_dir']
   action [ :configure, :install_with_make ]
 end
