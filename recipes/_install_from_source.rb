@@ -19,7 +19,7 @@ include_recipe "build-essential"
 
 user_packages = %w(librrd2-dev libsnmp-dev)
 unless node['collectd']['build_prereq_pkgs'].nil?
-  user_packages << node['collectd']['build_prereq_pkgs']
+  node['collectd']['build_prereq_pkgs'].each { |pkgs| user_packages << pkgs}
 end
 
 user_packages.each do |build_pkgs|
@@ -33,7 +33,7 @@ user_autoconf_options = [
 ]
 
 unless node['collectd']['autoconf_opts'].nil?
-  user_autoconf_options << node['collectd']['autoconf_opts']
+  node['collectd']['autoconf_opts'].each { |aco| user_autoconf_options << aco }
 end
 
 tar_source_url = "#{node['collectd']['source_url_prefix']}/#{node['collectd']['source_tar_name_prefix']}#{node['collectd']['version']}#{node['collectd']['source_tar_name_extension']}"
