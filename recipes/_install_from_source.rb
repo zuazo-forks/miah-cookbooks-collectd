@@ -43,5 +43,5 @@ ark "collectd" do
  version node['collectd']['version']
  checksum node['collectd']['checksum']
  autoconf_opts user_autoconf_options
- action :install_with_make
+ action [ :configure, :install_with_make ]
 end
