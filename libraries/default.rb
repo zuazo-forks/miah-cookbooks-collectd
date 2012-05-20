@@ -67,3 +67,24 @@ def collectd_purge_plugins(path)
     end
   end
 end
+
+# Return the cookbook template based on type.
+def collectd_set_plugin_template(type)
+  case
+  when type.downcase == "plugin" || type.nil?
+    template = "plugin.conf.erb"
+  when type.downcase == "perl"
+    template = "perl_plugin.conf.erb"
+  when type.downcase == "python"
+    template = "python_plugin.conf.erb"
+  when type.downcase == "java"
+    template = "java_plugin.conf.erb"
+  when type.downcase == "threshold"
+    template = "threshold_plugin.conf.erb"
+  when type.downcase == "exec"
+    template = "exec_plugin.conf.erb"
+  when type.downcase == "unixsock"
+    template = "unixsock_plugin.conf.erb"
+  end
+  return template
+end
