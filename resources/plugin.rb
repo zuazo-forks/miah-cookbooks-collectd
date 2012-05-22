@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: collectd
-# Resource :: collectd_plugin
+# Resource :: plugin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,12 @@ end
 action :create, :delete
 
 attribute :name, :kind_of => String, :name_attribute => true
-attribute :type, :kind_of => String
+attribute :type, :kind_of => String, :default => "plugin", :equal_to => [ "plugin",
+                                                                          "python",
+                                                                          "perl",
+                                                                          "exec",
+                                                                          "unixsock",
+                                                                          "java" ]
 attribute :module, :kind_of => String
 attribute :template, :kind_of => String
 attribute :cookbook, :kind_of => String
