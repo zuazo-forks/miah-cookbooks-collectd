@@ -71,7 +71,7 @@ end
 # Return the cookbook template based on type.
 def collectd_set_plugin_template(type)
   case
-  when type.downcase == "plugin" || type.nil?
+  when type.downcase == "plugin" || type.empty?
     template = "plugin.conf.erb"
   when type.downcase == "perl"
     template = "perl_plugin.conf.erb"
