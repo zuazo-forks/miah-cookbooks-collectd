@@ -21,13 +21,8 @@ action :create do
     owner "root"
     group "root"
     mode 0644
-    if params[:template].nil?
-      source "plugin.conf.erb"
-      cookbook params[:cookbook] || "collectd"
-    else
-      source params[:template]
-      cookbook params[:cookbook]
-    end
+    source collectd_set_plugin_template(params[:type])
+    cookbook params[:cookbook] || "collectd"
     variables :name=>new_resource.name, :options=>params[:options]
     notifies :restart, "service[collectd]", :delayed
   end
