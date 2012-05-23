@@ -30,5 +30,6 @@ attribute :type, :kind_of => String, :default => "plugin", :equal_to => [ "plugi
                                                                           "unixsock",
                                                                           "java" ]
 attribute :module, :kind_of => String
+attribute :options, :kind_of => Hash
 attribute :template, :kind_of => String
 attribute :cookbook, :kind_of => String
