@@ -29,7 +29,7 @@ attribute :type, :kind_of => String, :default => "plugin", :equal_to => [ "plugi
                                                                           "exec",
                                                                           "unixsock",
                                                                           "java" ]
-attribute :module, :kind_of => String
+attribute :modules, :kind_of => Hash
 attribute :options, :kind_of => Hash
 attribute :template, :kind_of => String
 attribute :cookbook, :kind_of => String
