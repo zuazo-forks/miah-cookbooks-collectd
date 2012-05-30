@@ -16,6 +16,15 @@
 #
 
 action :create do
+  cookbook_file new_resource.name do
+    path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}"
+    source new_resource.name
+    cookbook params[:cookbook] || "collectd"
+    owner "root"
+    group "root"
+    mode 0644
+  end
+
   template new_resource.name do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
     owner "root"
