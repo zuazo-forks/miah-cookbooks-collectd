@@ -15,4 +15,9 @@
 # limitations under the License.
 #
 
-include_recipe "collectd::client"
+case node['collectd']['install_type']
+when "package"
+  include_recipe "collectd::_install_from_package"
+when "source"
+  include_recipe "collectd::_install_from_source"
+end
