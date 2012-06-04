@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: collectd
-# Recipe:: server
+# Recipe:: _server_conf
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-include_recipe "collectd::_install_from_source"
-include_recipe "collectd::_server_plugins"
-include_recipe "collectd::_server_conf"
-include_recipe "collectd::_server_runit"
-
-collectd_plugin "network" do
-  options :listen=>'0.0.0.0'
+%w(collectd thresholds).each do |file|
+  template "#{node['collectd']['sysconf_dir']}/#{file}.conf" do
+    source "#{file}.conf.erb"
+    owner "root"
+    group "root"
+    mode 0644
+    notifies :restart, resources(:service => "collectd"), :delayed
+  end
 end

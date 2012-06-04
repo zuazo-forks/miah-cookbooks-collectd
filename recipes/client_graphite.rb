@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: collectd
-# Recipe:: client
+# Recipe:: client_graphite
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,15 +25,17 @@ servers = []
 if Chef::Config[:solo]
   Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
 else
-	search(:node, "role:#{node['collectd']['server_role']} AND #{node.chef_environment}") do |n|
+	search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
   		servers << n['fqdn']
 	end
 end
 
 if servers.empty?
-  raise "No collectd servers found! Please configure at least one node with role: \"#{node['collectd']['server_role']}\" in environment: \"#{node.chef_environment}\"."
+  raise "No graphite servers found! Please configure at least one node with role: \"#{node['graphite']['server_role']}\" in environment: \"#{node.chef_environment}\"."
 end
 
-collectd_plugin "network" do
-  options :server=>servers
+collectd_plugin "write_graphite" do
+  options({ :host => servers, :storerates => "false" })
+  type "plugin"
+  cookbook "collectd"
 end
