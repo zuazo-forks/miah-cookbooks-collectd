@@ -15,6 +15,13 @@
 # limitations under the License.
 #
 
+case node['platform_family']
+when 'debian'
+  include_recipe "apt"
+when 'rhel'
+  include_recipe "yum"
+end
+
 package "collectd" do
   package_name "collectd"
 end
