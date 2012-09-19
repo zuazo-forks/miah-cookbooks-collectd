@@ -5,9 +5,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,15 +16,6 @@
 #
 
 action :create do
-  cookbook_file new_resource.name do
-    path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}"
-    source new_resource.name
-    cookbook params[:cookbook] || "collectd"
-    owner "root"
-    group "root"
-    mode 0644
-  end
-
   template new_resource.name do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
     owner "root"
