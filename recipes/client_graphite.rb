@@ -37,5 +37,6 @@ end
 collectd_plugin "write_graphite" do
   options({ :host => servers, :storerates => false })
   type "plugin"
+  source "write_graphite.conf.erb"
   cookbook "collectd"
 end
