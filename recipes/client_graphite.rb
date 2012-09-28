@@ -25,9 +25,9 @@ servers = []
 if Chef::Config[:solo]
   Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
 else
-	search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
-  		servers << n['fqdn']
-	end
+  search(:node, "roles:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
+    servers << n['fqdn']
+  end
 end
 
 if servers.empty?
@@ -35,7 +35,8 @@ if servers.empty?
 end
 
 collectd_plugin "write_graphite" do
-  options({ :host => servers, :storerates => "false" })
+  options({ :host => servers, :storerates => false })
   type "plugin"
+  source "write_graphite.conf.erb"
   cookbook "collectd"
 end

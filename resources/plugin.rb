@@ -15,11 +15,6 @@
 # limitations under the License.
 #
 
-def initalize(*args)
-  super
-  @action = :create
-end
-
 actions :create, :delete
 
 attribute :name, :kind_of => String, :name_attribute => true
@@ -32,4 +27,10 @@ attribute :type, :kind_of => String, :default => "plugin", :equal_to => [ "plugi
 attribute :modules, :kind_of => Hash
 attribute :options, :kind_of => Hash
 attribute :template, :kind_of => String
+attribute :source, :kind_of => String
 attribute :cookbook, :kind_of => String
+
+def initialize(*args)
+  super
+  @action = :create
+end
