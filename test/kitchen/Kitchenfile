@@ -1,0 +1,3 @@
+cookbook "chef-collectd" do
+  runtimes []
+end
