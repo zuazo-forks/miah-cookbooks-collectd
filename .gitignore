@@ -1,2 +1,4 @@
 metadata.json
 *.swp
+.bundle
+vendor/
