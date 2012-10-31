@@ -2,7 +2,7 @@
 # Changes will be overwritten, do not edit!
 LoadPlugin "<%= @name %>"
 
-<% if not @options.empty? %>
+<% unless @options.empty? %>
 <Plugin "<%= @name %>">
   <% @options.each_pair do |key, value|
     if value.is_a? Array 
