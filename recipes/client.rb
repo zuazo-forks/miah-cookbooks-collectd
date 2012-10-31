@@ -46,5 +46,6 @@ if servers.empty?
 end
 
 collectd_plugin "network" do
-  options :server=>servers
+  options :server => servers
+  type 'plugin'
 end
