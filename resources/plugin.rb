@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+def initialize(*args)
+  super
+  @action = :create
+end
 
 actions :create, :delete
 
@@ -29,8 +33,3 @@ attribute :options, :kind_of => Hash
 attribute :template, :kind_of => String
 attribute :source, :kind_of => String
 attribute :cookbook, :kind_of => String
-
-def initialize(*args)
-  super
-  @action = :create
-end
