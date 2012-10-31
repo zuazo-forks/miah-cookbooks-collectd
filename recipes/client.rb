@@ -34,15 +34,15 @@ end
 servers = []
 
 if Chef::Config[:solo]
-  Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
+  if node['collectd']['server_address']
+    servers << node['collectd']['server_address']
+  else
+    servers << '127.0.0.1'
+  end
 else
-	search(:node, "role:#{node['collectd']['server_role']} AND #{node.chef_environment}") do |n|
-  		servers << n['fqdn']
-	end
-end
-
-if servers.empty?
-  raise "No collectd servers found! Please configure at least one node with role: \"#{node['collectd']['server_role']}\" in environment: \"#{node.chef_environment}\"."
+  search(:node, "role:#{node['collectd']['server_role']} AND #{node.chef_environment}") do |n|
+    servers << n['fqdn']
+  end
 end
 
 collectd_plugin "network" do
