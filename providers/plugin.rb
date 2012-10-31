@@ -16,6 +16,14 @@
 #
 
 action :create do
+
+  directory node['collectd']['plugconf_dir'] do
+    owner 'root'
+    group 'root'
+    mode '0755'
+    action :create
+  end
+
   template new_resource.name do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
     owner "root"
