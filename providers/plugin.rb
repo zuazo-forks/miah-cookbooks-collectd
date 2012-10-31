@@ -29,9 +29,12 @@ action :create do
     owner "root"
     group "root"
     mode 0644
-    source collectd_set_plugin_template(new_resource.type)
-    cookbook params[:cookbook] || "collectd"
-    variables :name=>new_resource.name, :options=>new_resource.options
+    source new_resource.template ? new_resource.template : "#{new_resource.type}_conf.erb"
+    cookbook new_resource.template ? new_resource.cookbook_name : 'collectd'
+    variables({
+      :name => new_resource.name,
+      :options => new_resource.options
+    })
     notifies :restart, "service[collectd]", :delayed
   end
   new_resource.updated_by_last_action(true)
