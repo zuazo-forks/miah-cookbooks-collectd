@@ -47,7 +47,7 @@ def collectd_settings(options, level=0)
 end
 
 # Purges unused plugins from the configuration directory.
-def collectd_purge_plugins(path)
+def collectd_purge_plugins
   dir["#{node['collectd']['plugconf_dir']}/*.conf"].each do |path|
     autogen = false
     File.open(path).each_line do |line|
