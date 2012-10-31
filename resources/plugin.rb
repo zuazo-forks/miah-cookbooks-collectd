@@ -22,12 +22,10 @@ end
 actions :create, :delete
 
 attribute :name, :kind_of => String, :name_attribute => true
-attribute :type, :kind_of => String, :default => "plugin", :equal_to => [ "plugin",
-                                                                          "python",
-                                                                          "perl",
-                                                                          "exec",
-                                                                          "unixsock",
-                                                                          "java" ]
+
+types = %w(plugin python perl exec unixsock java)
+attribute :type, :kind_of => String, :default => 'plugin', :equal_to => types
+
 attribute :modules, :kind_of => Hash
 attribute :options, :kind_of => Hash
 attribute :template, :kind_of => String
