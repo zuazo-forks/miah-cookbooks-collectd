@@ -29,7 +29,7 @@ action :create do
     owner "root"
     group "root"
     mode 0644
-    source new_resource.template ? new_resource.template : "#{new_resource.type}_conf.erb"
+    source(new_resource.template || "#{new_resource.type}_conf.erb")
     cookbook new_resource.template ? new_resource.cookbook_name : 'collectd'
     variables({
       :name => new_resource.name,
