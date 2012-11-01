@@ -43,7 +43,7 @@ end
 action :delete do
   file new_resource.name do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
-    action :delete 
+    action :delete
   end
   new_resource.updated_by_last_action(true)
 end
