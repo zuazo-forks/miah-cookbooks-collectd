@@ -27,25 +27,6 @@ include_recipe "collectd::_server_conf"
 case node.platform_family
 when 'rhel', 'fedora'
   include_recipe "collectd::_server_service"
-when 'debian', 'ubuntu'
+when 'debian'
   include_recipe "collectd::_server_runit"
-end
-
-servers = []
-
-if Chef::Config[:solo]
-  if node['collectd']['server_address']
-    servers << node['collectd']['server_address']
-  else
-    servers << '127.0.0.1'
-  end
-else
-  search(:node, "role:#{node['collectd']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
-    servers << n['fqdn']
-  end
-end
-
-collectd_plugin "network" do
-  options :server => servers
-  type 'plugin'
 end
