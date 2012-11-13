@@ -25,19 +25,33 @@ default['collectd']['source_tar_name_prefix'] = "collectd-"
 default['collectd']['source_tar_name_extension'] = ".tar.gz"
 default['collectd']['source_url_prefix'] = "http://collectd.org/files/"
 default['collectd']['checksum'] = "521d4be7df5bc1124b7b9ea88227e95839a5f7c1b704a5bde0f60f058ec6eecb"
-default['collectd']['types_db'] = ["/opt/collectd/share/collectd/types.db"]
 default['collectd']['log_level'] = "error"
 default['collectd']['log_file'] = "collectd.log"
 default['collectd']['log_timestamp'] = "true"
 default['collectd']['log_print_severity'] = "false"
-default['collectd']['prefix_dir'] = "/opt/collectd"
-default['collectd']['sysconf_dir'] = "/opt/collectd/etc"
-default['collectd']['plugconf_dir'] = "/opt/collectd/etc/plugins"
-default['collectd']['bin_dir'] = "/opt/collectd/bin"
-default['collectd']['src_dir'] = "/opt/src-collectd"
-default['collectd']['sbin_dir'] = "/opt/collectd/sbin"
-default['collectd']['log_dir'] = "/opt/collectd/logs"
-default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
 default['collectd']['ulimit']['file_descriptors'] = "65536"
 default['collectd']['build_prereq_pkgs'] = nil
 default['collectd']['autoconf_opts'] = nil
+
+case node['collectd']['install_type']
+when 'package'
+  default['collectd']['prefix_dir'] = "/usr"
+  default['collectd']['sysconf_dir'] = "/etc/collectd"
+  default['collectd']['plugconf_dir'] = "/etc/collectd/plugins"
+  default['collectd']['bin_dir'] = "/usr/bin"
+  default['collectd']['sbin_dir'] = "/usr/sbin"
+  default['collectd']['log_dir'] = "/var/log/collectd/"
+  default['collectd']['plugin_dir'] = "/usr/lib/collectd"
+  default['collectd']['types_db'] = ["/usr/share/collectd/types.db"]
+when 'source'
+  default['collectd']['prefix_dir'] = "/opt/collectd"
+  default['collectd']['sysconf_dir'] = "/opt/collectd/etc"
+  default['collectd']['plugconf_dir'] = "/opt/collectd/etc/plugins"
+  default['collectd']['bin_dir'] = "/opt/collectd/bin"
+  default['collectd']['src_dir'] = "/opt/src-collectd"
+  default['collectd']['sbin_dir'] = "/opt/collectd/sbin"
+  default['collectd']['log_dir'] = "/opt/collectd/logs"
+  default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
+  default['collectd']['types_db'] = ["/opt/collectd/share/collectd/types.db"]
+end
+

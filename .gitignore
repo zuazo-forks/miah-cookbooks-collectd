@@ -1,2 +1,5 @@
 metadata.json
 *.swp
+.bundle
+vendor/
+test/kitchen/.kitchen

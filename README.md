@@ -69,6 +69,7 @@ end
 Author:: Miah Johnson (<miah@chia-pet.org>)
 Author:: Phillip Gentry (<phillip@cx.com>)
 Author:: Noah Kantrowitz (<noah@coderanger.net>)
+Author:: Scott M. Likens (<scott@likens.us>)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

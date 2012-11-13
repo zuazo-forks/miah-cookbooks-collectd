@@ -7,9 +7,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,7 +47,7 @@ def collectd_settings(options, level=0)
 end
 
 # Purges unused plugins from the configuration directory.
-def collectd_purge_plugins(path)
+def collectd_purge_plugins
   dir["#{node['collectd']['plugconf_dir']}/*.conf"].each do |path|
     autogen = false
     File.open(path).each_line do |line|
@@ -66,25 +66,4 @@ def collectd_purge_plugins(path)
       end
     end
   end
-end
-
-# Return the cookbook template based on type.
-def collectd_set_plugin_template(type)
-  case
-  when type.downcase == "plugin" || type.empty?
-    template = "plugin.conf.erb"
-  when type.downcase == "perl"
-    template = "perl_plugin.conf.erb"
-  when type.downcase == "python"
-    template = "python_plugin.conf.erb"
-  when type.downcase == "java"
-    template = "java_plugin.conf.erb"
-  when type.downcase == "threshold"
-    template = "threshold_plugin.conf.erb"
-  when type.downcase == "exec"
-    template = "exec_plugin.conf.erb"
-  when type.downcase == "unixsock"
-    template = "unixsock_plugin.conf.erb"
-  end
-  return template
 end
