@@ -16,6 +16,7 @@ end
 
 cookbook 'collectd' do
   configuration 'client'
+  configuration 'client_collectd'
   configuration 'client_graphite'
   configuration 'default'
   configuration 'server'

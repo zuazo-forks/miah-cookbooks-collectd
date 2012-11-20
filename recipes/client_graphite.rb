@@ -20,10 +20,10 @@ include_recipe "collectd::client"
 servers = []
 
 if Chef::Config[:solo]
-  if node['graphite']['server_address']
-    servers << node['graphite']['server_address']
-  else
+  if node['graphite'].nil?
     servers << '127.0.0.1'
+  else
+    servers << node['graphite']['server_address']
   end
 else
   search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
