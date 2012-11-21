@@ -1,4 +1,3 @@
-#
 # Cookbook Name:: collectd
 # Provider:: plugin
 #
@@ -33,6 +32,7 @@ action :create do
     cookbook new_resource.template ? new_resource.cookbook_name : 'collectd'
     variables({
       :name => new_resource.name,
+      :modules => new_resource.modules,
       :options => new_resource.options
     })
     notifies :restart, "service[collectd]", :delayed
