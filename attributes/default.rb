@@ -42,7 +42,7 @@ when 'package'
   default['collectd']['sbin_dir'] = "/usr/sbin"
   default['collectd']['log_dir'] = "/var/log/collectd/"
   default['collectd']['plugin_dir'] = "/usr/lib/collectd"
-  default['collectd']['types_db'] = ["/usr/share/collectd/types.db"]
+  default['collectd']['types_db'] = "/usr/share/collectd/types.db"
 when 'source'
   default['collectd']['prefix_dir'] = "/opt/collectd"
   default['collectd']['sysconf_dir'] = "/opt/collectd/etc"
@@ -52,6 +52,6 @@ when 'source'
   default['collectd']['sbin_dir'] = "/opt/collectd/sbin"
   default['collectd']['log_dir'] = "/opt/collectd/logs"
   default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
-  default['collectd']['types_db'] = ["/opt/collectd/share/collectd/types.db"]
+  default['collectd']['types_db'] = "/opt/collectd/share/collectd/types.db"
 end
 
