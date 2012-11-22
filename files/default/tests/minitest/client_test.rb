@@ -17,16 +17,6 @@ describe 'collectd::client' do
     end
   end
 
-  describe 'collectd::_server_logfile' do
-    it 'creates the log_dir' do
-      directory(node['collectd']['log_dir']).must_exist
-    end
-
-    it 'creates logfile.conf' do
-      file("#{node['collectd']['plugconf_dir']}/logfile.conf").must_exist
-    end
-  end
-
   describe 'collectd::_server_conf' do
     it 'creates the sysconf_dir' do
       directory(node['collectd']['sysconf_dir']).must_exist
