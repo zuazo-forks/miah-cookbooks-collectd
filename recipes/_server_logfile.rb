@@ -15,9 +15,17 @@
 # limitations under the License.
 #
 
+include_recipe 'collectd::_server_logrotate'
+
 log_file = "#{node['collectd']['log_dir']}/#{node['collectd']['log_file']}"
 
-collectd_plugin "logfile" do
+directory node['collectd']['log_dir'] do
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+collectd_plugin 'logfile' do
   options :loglevel => node['collectd']['log_level'],
           :file => log_file,
           :timestamp => node['collectd']['log_timestamp'],
