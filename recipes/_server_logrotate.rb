@@ -15,10 +15,12 @@
 # limitations under the License.
 #
 
-logrotate_app "collectd-logs" do
-  cookbook "logrotate"
+include_recipe 'logrotate::default'
+
+logrotate_app 'collectd_logs' do
+  cookbook 'logrotate'
   path node['collectd']['log_dir']
-  frequency "daily"
-  rotate "30"
-  create "644 root root"
+  frequency 'daily'
+  rotate '30'
+  create '644 root root'
 end
