@@ -6,6 +6,18 @@ Configure and install the [collectd](http://collectd.org/) monitoring daemon.
 
 This cookbook has only been tested on Ubuntu 10.04 and 12.04.
 
+The following cookbooks are required:
+
++ [apt](http://community.opscode.com/cookbooks/apt)
++ [ark](http://community.opscode.com/cookbooks/ark)
++ [build-essential](http://community.opscode.com/cookbooks/build-essential)
++ [logrotate](http://community.opscode.com/cookbooks/logrotate)
++ [runit](http://community.opscode.com/cookbooks/runit)
++ [yum](http://community.opscode.com/cookbooks/yum)
+
+Centos/RHEL support is implied by the metadata and should work. The cookbook 
+is lacking an initscript template to deploy when `runit` isn't available.
+
 # ATTRIBUTES #
 
 + collectd.basedir - Base folder for collectd output data.
@@ -53,7 +65,7 @@ Any symbol key will be converted to camel-case. In the above example
 already a string, this conversion is skipped. If the value is an array, it
 will be output as a separate line for each element.
 
-# LICENSE & AUTHOR #
+# LICENSE & AUTHORS #
 
 + Author:: Miah Johnson (<miah@chia-pet.org>)
 + Author:: Phillip Gentry (<phillip@cx.com>)
