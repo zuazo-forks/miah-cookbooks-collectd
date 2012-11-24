@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 default['collectd']['interval'] = 10
 default['collectd']['read_threads'] = 5
 default['collectd']['version'] = "5.1.0"
@@ -54,4 +53,3 @@ when 'source'
   default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
   default['collectd']['types_db'] = "/opt/collectd/share/collectd/types.db"
 end
-
