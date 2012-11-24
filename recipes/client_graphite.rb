@@ -43,6 +43,6 @@ collectd_plugin 'carbon_writer' do
     :derive_counters => true,
     :lowercase_metric_names => true,
     :differentiate_counters_over_time => true,
-    :types_d_b => node['collectd']['types_db']
+    'TypesDB' => node['collectd']['types_db']
   type 'python'
 end
