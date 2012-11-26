@@ -10,7 +10,7 @@ Hostname "<%= @node['fqdn'] %>"
 FQDNLookup "<%= @node['fqdn_lookup'] %>"
 Interval <%= @node['collectd']['interval'] %>
 ReadThreads <%= @node['collectd']['read_threads'] %>
-TypesDB "<%= @node['collectd']['types_db'].join('", "') %>"
+TypesDB "<%= @node['collectd']['types_db'] %>"
 BaseDir "<%= @node['collectd']['prefix_dir'] %>"
 PluginDir "<%= @node['collectd']['plugin_dir'] %>"
 

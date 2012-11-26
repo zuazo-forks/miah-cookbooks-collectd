@@ -20,7 +20,7 @@ include_recipe "ark"
 
 user_packages = %w(librrd2-dev libsnmp-dev)
 unless node['collectd']['build_prereq_pkgs'].nil?
-  node['collectd']['build_prereq_pkgs'].each { |pkgs| user_packages << pkgs}
+  node['collectd']['build_prereq_pkgs'].each { |pkgs| user_packages << pkgs }
 end
 
 user_packages.each do |build_pkgs|
@@ -46,5 +46,5 @@ ark "collectd" do
   autoconf_opts user_autoconf_options
   prefix_root node['collectd']['prefix_dir']
   path node['collectd']['src_dir']
-  action [ :configure, :install_with_make ]
+  action [:configure, :install_with_make]
 end
