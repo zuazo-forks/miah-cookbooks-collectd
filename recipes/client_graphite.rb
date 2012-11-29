@@ -25,7 +25,7 @@ if Chef::Config[:solo]
   end
 else
   search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
-    server = n['fqdn']
+    server = n['ipaddress']
   end
 end
 
