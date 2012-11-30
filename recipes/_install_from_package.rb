@@ -23,6 +23,24 @@ when 'rhel'
   include_recipe "yum"
 end
 
+# This is dirty. Race-Conditions suck.
+execute 'kill_collectdmon' do
+  command 'kill -TERM $(pidof collectdmon)'
+  user 'root'
+  action :nothing
+  retries 6
+end
+
+service 'postinst_collectd_init' do
+  service_name 'collectd'
+  provider Chef::Provider::Service::Init
+  action :nothing
+end
+
 package "collectd" do
   package_name "collectd"
+  notifies :stop, 'service[postinst_collectd_init]', :immediately
+  notifies :disable, 'service[postinst_collectd_init]', :immediately
+  notifies :run, 'execute[kill_collectdmon]', :immediately
 end
+
