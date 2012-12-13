@@ -32,24 +32,12 @@ default['collectd']['ulimit']['file_descriptors'] = "65536"
 default['collectd']['build_prereq_pkgs'] = nil
 default['collectd']['autoconf_opts'] = nil
 
-case node['collectd']['install_type']
-when 'package'
-  default['collectd']['prefix_dir'] = "/usr"
-  default['collectd']['sysconf_dir'] = "/etc/collectd"
-  default['collectd']['plugconf_dir'] = "/etc/collectd/plugins"
-  default['collectd']['bin_dir'] = "/usr/bin"
-  default['collectd']['sbin_dir'] = "/usr/sbin"
-  default['collectd']['log_dir'] = "/var/log/collectd/"
-  default['collectd']['plugin_dir'] = "/usr/lib/collectd"
-  default['collectd']['types_db'] = "/usr/share/collectd/types.db"
-when 'source'
-  default['collectd']['prefix_dir'] = "/opt/collectd"
-  default['collectd']['sysconf_dir'] = "/opt/collectd/etc"
-  default['collectd']['plugconf_dir'] = "/opt/collectd/etc/plugins"
-  default['collectd']['bin_dir'] = "/opt/collectd/bin"
-  default['collectd']['src_dir'] = "/opt/src-collectd"
-  default['collectd']['sbin_dir'] = "/opt/collectd/sbin"
-  default['collectd']['log_dir'] = "/opt/collectd/logs"
-  default['collectd']['plugin_dir'] = "/opt/collectd/lib/collectd"
-  default['collectd']['types_db'] = "/opt/collectd/share/collectd/types.db"
-end
+default['collectd']['prefix_dir'] = "/usr"
+default['collectd']['sysconf_dir'] = "/etc/collectd"
+default['collectd']['plugconf_dir'] = "/etc/collectd/plugins"
+default['collectd']['bin_dir'] = "/usr/bin"
+default['collectd']['sbin_dir'] = "/usr/sbin"
+default['collectd']['log_dir'] = "/var/log/collectd/"
+default['collectd']['plugin_dir'] = "/usr/lib/collectd"
+default['collectd']['types_db'] = "/usr/share/collectd/types.db"
+default['collectd']['src_dir'] = "/opt/src-collectd"
