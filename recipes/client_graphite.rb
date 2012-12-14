@@ -30,7 +30,7 @@ collectd_plugin 'write_graphite' do
   options({
     :host => server,
     :port => 2003,
-    :prefix => "collectd.",
+    :prefix => node['collectd']['graphite_prefix'],
     :escape_character => "_",
     :store_rates => false
   })
