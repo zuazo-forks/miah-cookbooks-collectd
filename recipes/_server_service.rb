@@ -15,6 +15,13 @@
 # limitations under the License.
 #
 
+template "/etc/init.d/collectd" do
+  source "collectd-init.d.erb"
+  owner  "root"
+  group  "root"
+  mode   0755
+end
+
 service 'collectd' do
   supports :restart => true, :status => true
   action [:enable, :start]
