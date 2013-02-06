@@ -31,6 +31,7 @@ default['collectd']['log_print_severity'] = "false"
 default['collectd']['ulimit']['file_descriptors'] = "65536"
 default['collectd']['build_prereq_pkgs'] = nil
 default['collectd']['autoconf_opts'] = nil
+default['collectd']['graphite_prefix'] = "collectd."
 
 default['collectd']['prefix_dir'] = "/usr"
 default['collectd']['sysconf_dir'] = "/etc/collectd"

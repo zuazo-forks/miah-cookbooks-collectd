@@ -17,32 +17,41 @@
 
 include_recipe "collectd::client"
 
-if Chef::Config[:solo]
-  if node['graphite'].nil?
-    server = '127.0.0.1'
-  else
-    server = node['graphite']['server_address']
-  end
-else
+if !Chef::Config[:solo] && !node['graphite']['server_role'].nil?
   search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
     server = n['fqdn']
   end
 end
 
-cookbook_file 'carbon_writer_py' do
-  source 'carbon_writer.py'
-  path   "#{ node['collectd']['plugin_dir'] }/carbon_writer.py"
-  owner  'root'
-  group  'root'
-  mode   0644
-end
+server = node['graphite']['server_address'] || "127.0.0.1" if server.nil?
 
-collectd_plugin 'carbon_writer' do
-  options :line_receiver_host => server,
-    :line_receiver_port => 2003,
-    :derive_counters => true,
-    :lowercase_metric_names => true,
-    :differentiate_counters_over_time => true,
-    'TypesDB' => node['collectd']['types_db']
-  type 'python'
+if node['collectd']['version'] =~ /5\.\d+/
+  collectd_plugin 'write_graphite' do
+    template "write_graphite.conf.erb"
+    options({
+      :host => server,
+      :port => 2003,
+      :prefix => node['collectd']['graphite_prefix'],
+      :escape_character => "_",
+      :store_rates => false
+    })
+  end
+else
+  cookbook_file 'carbon_writer_py' do
+    source 'carbon_writer.py'
+    path   "#{ node['collectd']['plugin_dir'] }/carbon_writer.py"
+    owner  'root'
+    group  'root'
+    mode   0644
+  end
+
+  collectd_plugin 'carbon_writer' do
+    options :line_receiver_host => server,
+      :line_receiver_port => 2003,
+      :derive_counters => true,
+      :lowercase_metric_names => true,
+      :differentiate_counters_over_time => true,
+      'TypesDB' => node['collectd']['types_db']
+    type 'python'
+  end
 end
