@@ -17,13 +17,17 @@
 
 include_recipe "collectd::client"
 
-if !Chef::Config[:solo] && !node['graphite']['server_role'].nil?
+server = nil
+if Chef::Config[:solo]
+  server = node['graphite']['server_address']
+elsif !node['graphite']['server_role'].nil?
   search(:node, "role:#{node['graphite']['server_role']} AND chef_environment:#{node.chef_environment}") do |n|
     server = n['fqdn']
   end
 end
 
-server = node['graphite']['server_address'] || "127.0.0.1" if server.nil?
+Chef::Log.warn("Server note found, defaulting to 127.0.0.1") unless server
+server ||= "127.0.0.1"
 
 if node['collectd']['version'] =~ /5\.\d+/
   collectd_plugin 'write_graphite' do
