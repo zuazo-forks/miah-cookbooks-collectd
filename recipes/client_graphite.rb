@@ -27,7 +27,7 @@ elsif node['graphite']['server_role']
   Chef::Log.warn("node with role #{node['graphite']['server_role']} not found"} unless server
 end
 
-server = node['graphite']['server_address']
+server ||= node['graphite']['server_address']
 Chef::Log.warn("node.graphite.server_address not set. defaulting to 127.0.0.1"} unless server
 server ||= "127.0.0.1"
 
