@@ -15,9 +15,6 @@ The following cookbooks are required:
 + [runit](http://community.opscode.com/cookbooks/runit)
 + [yum](http://community.opscode.com/cookbooks/yum)
 
-Centos/RHEL support is implied by the metadata and should work. The cookbook 
-is lacking an initscript template to deploy when `runit` isn't available.
-
 # ATTRIBUTES #
 
 + collectd.basedir - Base folder for collectd output data.
