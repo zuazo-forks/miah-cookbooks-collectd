@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-case node.platform_family
+case node['platform_family']
 when 'debian'
   include_recipe "apt"
 when 'rhel'
