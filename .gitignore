@@ -3,3 +3,6 @@ metadata.json
 .bundle
 vendor/
 test/kitchen/.kitchen
+.kitchen/
+.kitchen.local.yml
+*.lock
