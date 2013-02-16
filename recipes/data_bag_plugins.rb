@@ -1,3 +1,5 @@
+include_recipe "collectd::client"
+
 bag = node.collectd.data_bag_name
 
 node.collectd.plugins.each do |instance|

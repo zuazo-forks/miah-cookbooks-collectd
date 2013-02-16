@@ -30,3 +30,11 @@ suites:
   run_list:
   - recipe[collectd]
   attributes: {}
+- name: databag
+  run_list:
+  - recipe[collectd::data_bag_plugins]
+  attributes:
+    collectd:
+      plugins:
+      - load
+      - df
