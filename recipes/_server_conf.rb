@@ -17,7 +17,7 @@
 sysconf = node['collectd']['sysconf_dir']
 plugconf = node['collectd']['plugconf_dir']
 
-%w(sysconf plugconf).each do |dir|
+[sysconf, plugconf].each do |dir|
   directory dir do
     owner 'root'
     group 'root'
@@ -27,7 +27,7 @@ plugconf = node['collectd']['plugconf_dir']
 end
 
 %w(collectd thresholds).each do |file|
-  template "#{node['collectd']['sysconf_dir']}/#{file}.conf" do
+  template "#{sysconf}/#{file}.conf" do
     source "#{file}.conf.erb"
     owner "root"
     group "root"
