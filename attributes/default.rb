@@ -39,6 +39,13 @@ default['collectd']['plugconf_dir'] = "/etc/collectd/plugins"
 default['collectd']['bin_dir'] = "/usr/bin"
 default['collectd']['sbin_dir'] = "/usr/sbin"
 default['collectd']['log_dir'] = "/var/log/collectd/"
-default['collectd']['plugin_dir'] = "/usr/lib/collectd"
+
+case node['kernel']['machine']
+when "x86_64"
+  default['collectd']['plugin_dir'] = "/usr/lib64/collectd"
+else
+  default['collectd']['plugin_dir'] = "/usr/lib/collectd"
+end
+
 default['collectd']['types_db'] = "/usr/share/collectd/types.db"
 default['collectd']['src_dir'] = "/opt/src-collectd"
