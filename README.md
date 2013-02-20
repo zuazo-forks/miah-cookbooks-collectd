@@ -24,10 +24,22 @@ is lacking an initscript template to deploy when `runit` isn't available.
 + collectd.plugin_dir - Base folder to find plugins.
 + collectd.types_db - Path to the files to read graph type information from.
 + collectd.interval - Time period in seconds to wait between data reads.
++ collectd.install_type - Allows you to specify 'package' or 'source' installs.
+
+## Source Installs
+
+Please be considerate here and install from a local mirror. Consider all of your
+nodes downloading a ~1.5mb file from collectd.org and what their hosting costs will be.
+
++ collectd.source_url_prefix -
++ collectd.source_tar_name_prefix
++ collectd.source_tar_name_extension
++ collectd.checksum
++ collectd.version
 
 # USAGE #
 
-Three main recipes are provided:
+Four main recipes are provided:
 
 + collectd::client or collectd::default - Install a unconfigured collectd
 + collectd::client_collectd - Install collectd and configure it to send data to a collectd server.
