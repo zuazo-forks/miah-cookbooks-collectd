@@ -17,6 +17,7 @@
 action :create do
 
   directory node['collectd']['plugconf_dir'] do
+    recursive true
     owner 'root'
     group 'root'
     mode '0755'
