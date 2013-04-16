@@ -18,10 +18,8 @@
 include_recipe "build-essential"
 include_recipe "ark"
 
-user_packages = value_for_platform_family(
-  ["rhel", "fedora", "suse"] => %w(rrdtool-devel net-snmp-devel perl-ExtUtils-MakeMaker),
-  "debian" => %w(librrd2-dev libsnmp-dev)
-)
+user_packages = []
+
 unless node['collectd']['build_prereq_pkgs'].nil?
   node['collectd']['build_prereq_pkgs'].each { |pkgs| user_packages << pkgs }
 end

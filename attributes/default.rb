@@ -29,7 +29,14 @@ default['collectd']['log_file'] = "collectd.log"
 default['collectd']['log_timestamp'] = "true"
 default['collectd']['log_print_severity'] = "false"
 default['collectd']['ulimit']['file_descriptors'] = "65536"
-default['collectd']['build_prereq_pkgs'] = nil
+case node["platform_family"]
+when "debian"
+  default['collectd']['build_prereq_pkgs'] = %w(librrd2-dev libsnmp-dev)
+when "rhel", "fedora"
+  default['collectd']['build_prereq_pkgs'] = %w(rrdtool-devel net-snmp-devel perl-ExtUtils-MakeMaker)
+else
+  default['collectd']['build_prereq_pkgs'] = nil
+end
 default['collectd']['autoconf_opts'] = nil
 default['collectd']['graphite_prefix'] = "collectd."
 
