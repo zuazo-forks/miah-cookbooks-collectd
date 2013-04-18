@@ -32,10 +32,10 @@ default['collectd']['ulimit']['file_descriptors'] = "65536"
 case node["platform_family"]
 when "debian"
   default['collectd']['build_prereq_pkgs'] = %w(librrd2-dev libsnmp-dev)
-when "rhel", "fedora"
+when "rhel", "fedora", "suse"
   default['collectd']['build_prereq_pkgs'] = %w(rrdtool-devel net-snmp-devel perl-ExtUtils-MakeMaker)
 else
-  default['collectd']['build_prereq_pkgs'] = nil
+  default['collectd']['build_prereq_pkgs'] = []
 end
 default['collectd']['autoconf_opts'] = nil
 default['collectd']['graphite_prefix'] = "collectd."
