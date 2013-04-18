@@ -18,13 +18,7 @@
 include_recipe "build-essential"
 include_recipe "ark"
 
-user_packages = []
-
-unless node['collectd']['build_prereq_pkgs'].nil?
-  node['collectd']['build_prereq_pkgs'].each { |pkgs| user_packages << pkgs }
-end
-
-user_packages.each do |build_pkgs|
+node['collectd']['build_prereq_pkgs'].each do |build_pkgs|
   package build_pkgs
 end
 
