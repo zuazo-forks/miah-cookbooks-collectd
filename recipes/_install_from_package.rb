@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-case node.platform_family
+case node['platform_family']
 when 'debian'
   include_recipe "apt"
 when 'rhel'
@@ -29,6 +29,7 @@ execute 'kill_collectdmon' do
   user 'root'
   action :nothing
   retries 6
+  only_if "ps aux | grep collectdmo[n]"
 end
 
 service 'postinst_collectd_init' do
