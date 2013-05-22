@@ -54,6 +54,11 @@ end
 collectd_plugin 'tcpconns' do
   options :listening_ports => true
 end
+
+collectd_plugin 'myplugin' do
+  type 'exec'
+  options :exec => ['user', '/path/to/exec.sh']
+end
 ```
 
 The `options` hash is converted to collectd-style settings automatically.
