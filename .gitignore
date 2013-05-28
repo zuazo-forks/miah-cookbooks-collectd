@@ -1,5 +1,5 @@
 metadata.json
-*.swp
+*.sw*
 .bundle
 vendor/
 test/kitchen/.kitchen
