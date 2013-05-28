@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'foodcritic', '>= 1.6.1'
 gem 'tailor', '>= 1.1.2'
