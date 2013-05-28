@@ -59,6 +59,19 @@ collectd_plugin 'myplugin' do
   type 'exec'
   options :exec => ['user', '/path/to/exec.sh']
 end
+
+# Taken from http://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_filecount
+collectd_plugin 'qmail' do
+  type 'filecount'
+  options 'Directory' => {
+    '/var/qmail/queue/mess' => {
+      :instance => 'qmail-message'
+    },
+    '/var/qmail/queue/todo' => {
+      :instance => 'qmail-todo'
+    }
+  }
+end
 ```
 
 The `options` hash is converted to collectd-style settings automatically.
