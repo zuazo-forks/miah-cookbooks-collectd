@@ -63,7 +63,7 @@ collectd_plugin 'sshd' do
       :instance => 'auth',
       :match => [
         {
-          :regex => '\\<sshd[^:]*: Invalid user [^ ]+ from\\>',
+          :regex => "\\<sshd[^:]*: Invalid user [^ ]+ from\\>",
           :d_s_type => 'CounterInc',
           :type => 'counter',
           :instance => 'sshd-invalid_user'
