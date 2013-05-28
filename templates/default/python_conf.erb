@@ -14,11 +14,14 @@
   ModulePath "<%= path %>"
   <% end %>
 <% end %>
+  
   Import "<%= @name  %>"
 
   <Module "<%= @name %>">
   <% @options.each_pair do |key, value| %>
+    <% if key != :paths %>
     <%= collectd_key(key) %> <%= collectd_option(value) %>
+    <% end %>
   <% end %>
   </Module>
 
