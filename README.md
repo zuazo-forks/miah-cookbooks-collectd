@@ -55,6 +55,11 @@ collectd_plugin 'tcpconns' do
   options :listening_ports => true
 end
 
+collectd_plugin 'myplugin' do
+  type 'exec'
+  options :exec => ['user', '/path/to/exec.sh']
+end
+
 # Taken from https://collectd.org/wiki/index.php/Plugin:Tail#Invalid_SSH_login_attempts
 collectd_plugin 'sshd' do
   type 'tail'
@@ -79,6 +84,16 @@ Any symbol key will be converted to camel-case. In the above example
 `:listening_ports` will be output as the key `ListeningPorts`. If the key is
 already a string, this conversion is skipped. If the value is an array, it
 will be output as a separate line for each element.
+
+### purge_plugins ###
+
+To purge unused plugins create a ruby block after all your other plugin declarations.  This will only remove plugins that that were originally declared using the collectd_plugin lwrp.
+
+```ruby
+ruby_block 'collectd_purge_plugins' do
+  block { collectd_purge_plugins() }
+end
+```
 
 # LICENSE & AUTHORS #
 
