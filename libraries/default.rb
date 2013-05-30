@@ -49,6 +49,37 @@ CFG
   output.join("\n")
 end
 
+def collectd_plugin_settings(options, level=0, overide_hash=false)
+  indent = '  ' * level
+  output = []
+  options.each_pair do |key, value|
+    if value.is_a? Array
+      value.each do |subvalue|
+        output << <<-CFG
+#{ indent }<#{ collectd_key(key) }>
+#{ collectd_plugin_settings(subvalue, level+1, true) }
+#{ indent }</#{ collectd_key(key) }>
+CFG
+      end
+    elsif value.is_a? Hash
+      value.each_pair do |name, suboptions|
+        if overide_hash
+          output << "#{ indent }#{ collectd_key(name) } #{ collectd_option(suboptions) }"
+        else
+          output << <<-CFG
+#{ indent }<#{ collectd_key(key) } \"#{ name }\">
+#{ collectd_plugin_settings(suboptions, level+1) }
+#{ indent }</#{ collectd_key(key) }>
+CFG
+        end
+      end
+    else
+      output << "#{ indent }#{ collectd_key(key) } #{ collectd_option(value) }"
+    end
+  end
+  output.join("\n")
+end
+
 # Purges unused plugins from the configuration directory.
 def collectd_purge_plugins
   Dir.glob("#{ node['collectd']['plugconf_dir'] }/*.conf") do |path|
