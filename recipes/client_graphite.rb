@@ -34,7 +34,7 @@ server ||= "127.0.0.1"
 
 if node['collectd']['version'] =~ /5\.\d+/
   collectd_plugin 'write_graphite' do
-    template "write_graphite.conf.erb"
+    type "write_graphite"
     options({
       :host => server,
       :port => 2003,
