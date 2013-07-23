@@ -49,7 +49,9 @@ default['collectd']['bin_dir'] = "/usr/bin"
 default['collectd']['sbin_dir'] = "/usr/sbin"
 default['collectd']['log_dir'] = "/var/log/collectd/"
 
-if node['kernel']['machine'] == 'x86_64' and not ( node['platform'] == "ubuntu" and node['platform_version'] == '12.04' )
+ubuntu_precise = (node['platform'] == "ubuntu" and node['platform_version'] == '12.04')
+
+if node['kernel']['machine'] == 'x86_64' and not ubuntu_precise
   default['collectd']['plugin_dir'] = "/usr/lib64/collectd"
 else
   default['collectd']['plugin_dir'] = "/usr/lib/collectd"
