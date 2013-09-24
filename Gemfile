@@ -5,6 +5,8 @@ gem 'tailor', '>= 1.1.2'
 
 group :integration do
   gem 'berkshelf'
-  gem "test-kitchen", "1.0.0.alpha.5"
+  gem 'test-kitchen', git: 'git://github.com/opscode/test-kitchen.git', branch: 'master'
   gem 'kitchen-vagrant'
+  gem 'busser'
+  gem 'busser-minitest'
 end
