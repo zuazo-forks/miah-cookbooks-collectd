@@ -58,7 +58,7 @@ else
       :derive_counters => true,
       :lowercase_metric_names => true,
       :differentiate_counters_over_time => true,
-      'TypesDB' => node['collectd']['types_db']
+      :types_d_b => node['collectd']['types_db']
     type 'python'
   end
 end
