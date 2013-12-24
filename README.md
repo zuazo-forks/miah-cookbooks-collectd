@@ -14,6 +14,7 @@ The following cookbooks are required:
 + [logrotate](http://community.opscode.com/cookbooks/logrotate)
 + [runit](http://community.opscode.com/cookbooks/runit)
 + [yum](http://community.opscode.com/cookbooks/yum)
++ [yum-epel](http://community.opscode.com/cookbooks/yum-epel)
 
 # ATTRIBUTES #
 

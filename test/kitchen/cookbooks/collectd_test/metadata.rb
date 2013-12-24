@@ -6,4 +6,4 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 maintainer 'Miah Johnson'
 maintainer_email 'miah@chia-pet.org'
 
-%w(apt ark build-essential logrotate runit yum).each { |cookbook| depends cookbook }
+%w(apt ark build-essential logrotate runit yum-epel).each { |cookbook| depends cookbook }
