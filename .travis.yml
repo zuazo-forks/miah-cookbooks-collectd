@@ -1,6 +1,6 @@
 language: ruby
 bundler_args: --without development
-script: foodcritic -f correctness . && tailor
+script: foodcritic -f correctness . && tailor && rspec
 rvm:
   - 2.0.0
   - 1.9.3

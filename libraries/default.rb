@@ -18,7 +18,21 @@
 #
 
 def collectd_key(option)
-  option.to_s.split('_').map { |x| x.capitalize }.join()
+  string_option = option.to_s
+  has_underscore = string_option.include? '_'
+  has_upper_case = string_option =~ /\p{Upper}/
+  if has_underscore && has_upper_case
+    message1 = "Option '#{option}' to generate collectd plugin key contains ambiguous characters."
+    message2 = "Got a mix of underscores and upper case letters but expected only one of these."
+    Chef::Log.warn("#{message1} #{message2}")
+  end
+  if has_underscore
+    string_option.split('_').map { |x| x.capitalize }.join()
+  elsif !has_upper_case
+    string_option.capitalize
+  else
+    string_option
+  end
 end
 
 def collectd_option(option)
