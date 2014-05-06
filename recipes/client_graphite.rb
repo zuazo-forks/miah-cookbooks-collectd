@@ -28,9 +28,12 @@ elsif node['graphite']['server_role']
   Chef::Log.warn("node with role #{node['graphite']['server_role']} not found") unless server
 end
 
-server = node['graphite']['server_address']
-Chef::Log.warn("node.graphite.server_address not set. defaulting to 127.0.0.1") unless server
-server = "127.0.0.1"
+if node['graphite']
+  server = node['graphite']['server_address']
+else
+  Chef::Log.warn("node.graphite.server_address not set. defaulting to 127.0.0.1")
+  server = "127.0.0.1"
+end
 
 if node['collectd']['version'] =~ /5\.\d+/
   collectd_plugin 'write_graphite' do
