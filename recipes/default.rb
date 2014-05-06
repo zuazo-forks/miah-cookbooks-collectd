@@ -15,9 +15,4 @@
 # limitations under the License.
 #
 
-case node['collectd']['install_type']
-when "package"
-  include_recipe "collectd::_install_from_package"
-when "source"
-  include_recipe "collectd::_install_from_source"
-end
+include_recipe "collectd::_install_from_#{node['collectd']['install_type']}"
