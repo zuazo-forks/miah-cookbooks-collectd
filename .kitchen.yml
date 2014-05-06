@@ -1,40 +1,26 @@
 ---
-driver_plugin: vagrant
+driver_plugin: digitalocean
+driver_config:
+  flavor_id: 66
+  require_chef_omnibus: latest
+
 platforms:
-- name: ubuntu-12.04
-  driver_config:
-    box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04.box
-  run_list:
-  - recipe[apt]
-- name: ubuntu-10.04
-  driver_config:
-    box: opscode-ubuntu-10.04
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-10.04.box
-  run_list:
-  - recipe[apt]
-- name: centos-6.3
-  driver_config:
-    box: opscode-centos-6.3
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box
-  run_list:
-  - recipe[yum-epel]
-- name: centos-5.8
-  driver_config:
-    box: opscode-centos-5.8
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-5.8.box
-  run_list:
-  - recipe[yum-epel]
+- name: ubuntu-13.10
+- name: debian-7.0
+
 suites:
 - name: default
   run_list:
-  - recipe[collectd]
-  attributes: {}
-- name: databag
+  - recipe[collectd_test]
+- name: collectd-server
   run_list:
-  - recipe[collectd::data_bag_plugins]
-  attributes:
-    collectd:
-      plugins:
-      - load
-      - df
+  - recipe[collectd_test::server]
+- name: collectd-client_graphite
+  run_list:
+  - recipe[collectd_test::client_graphite]
+- name: collectd-client_collectd
+  run_list:
+  - recipe[collectd_test::client_collectd]
+- name: collectd-plugin
+  run_list:
+  - recipe[collectd_test::plugin]

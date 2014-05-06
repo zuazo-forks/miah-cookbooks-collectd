@@ -1,4 +1,3 @@
-
 include_recipe 'collectd::client'
 
 %w(disk entropy memory swap).each do |plug|
