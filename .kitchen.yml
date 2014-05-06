@@ -24,3 +24,9 @@ suites:
 - name: collectd-plugin
   run_list:
   - recipe[collectd_test::plugin]
+- name: collectd-data_bag_plugins
+  run_list:
+  - recipe[collectd::data_bag_plugins]
+  attributes:
+    collectd:
+      plugins: ['df', 'load']
