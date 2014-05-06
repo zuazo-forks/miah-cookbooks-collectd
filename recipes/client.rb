@@ -16,11 +16,11 @@
 #
 
 include_recipe "collectd::_install_from_#{node['collectd']['install_type']}"
-include_recipe "collectd::_server_conf"
+include_recipe 'collectd::_server_conf'
 
 case node['platform_family']
 when 'rhel', 'fedora'
-  include_recipe "collectd::_server_service"
+  include_recipe 'collectd::_server_service'
 when 'debian'
-  include_recipe "collectd::_server_runit"
+  include_recipe 'collectd::_server_runit'
 end

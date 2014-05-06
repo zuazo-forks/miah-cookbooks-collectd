@@ -29,9 +29,9 @@ end
 %w(collectd thresholds).each do |file|
   template "#{sysconf}/#{file}.conf" do
     source "#{file}.conf.erb"
-    owner "root"
-    group "root"
-    mode 0644
-    notifies :restart, "service[collectd]", :delayed
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :restart, 'service[collectd]', :delayed
   end
 end

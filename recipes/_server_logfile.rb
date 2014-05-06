@@ -22,12 +22,12 @@ log_file = "#{ node['collectd']['log_dir'] }/#{ node['collectd']['log_file'] }"
 directory node['collectd']['log_dir'] do
   owner 'root'
   group 'root'
-  mode 0755
+  mode '0755'
 end
 
 collectd_plugin 'logfile' do
   options :loglevel => node['collectd']['log_level'],
-    :file => log_file,
-    :timestamp => node['collectd']['log_timestamp'],
-    :printseverity => node['collectd']['log_print_severity']
+          :file => log_file,
+          :timestamp => node['collectd']['log_timestamp'],
+          :printseverity => node['collectd']['log_print_severity']
 end

@@ -15,8 +15,8 @@
 # limitations under the License.
 #
 
-include_recipe "build-essential"
-include_recipe "ark"
+include_recipe 'build-essential'
+include_recipe 'ark'
 
 node['collectd']['build_prereq_pkgs'].each do |build_pkgs|
   package build_pkgs
@@ -36,10 +36,10 @@ tar_file = [
   node['collectd']['source_tar_name_prefix'],
   node['collectd']['version'],
   node['collectd']['source_tar_name_extension']
-].join("")
+].join('')
 tar_source_url = "#{node['collectd']['source_url_prefix']}/#{tar_file}"
 
-ark "collectd" do
+ark 'collectd' do
   url tar_source_url
   version node['collectd']['version']
   checksum node['collectd']['checksum']
