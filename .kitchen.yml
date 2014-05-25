@@ -31,3 +31,6 @@ suites:
   attributes:
     collectd:
       plugins: ['df', 'load']
+- name: collectd-authfile
+  run_list:
+    - recipe[collectd_test::authfile]

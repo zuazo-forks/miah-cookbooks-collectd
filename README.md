@@ -109,12 +109,27 @@ ruby_block 'collectd_purge_plugins' do
 end
 ```
 
+### collectd_authfile ###
+
+You may use the `collectd_authfile` provider to create a collectd authfile by adding and removing users.
+
+```ruby
+collectd_authfile 'gregf' do
+  password  supersecure
+end
+
+collectd_authfile 'baduser' do
+  action :remove
+end
+```
+
 # LICENSE & AUTHORS #
 
 + Author:: Miah Johnson (<miah@chia-pet.org>)
 + Author:: Phillip Gentry (<phillip@cx.com>)
 + Author:: Noah Kantrowitz (<noah@coderanger.net>)
 + Author:: Scott M. Likens (<scott@likens.us>)
++ Author:: Greg Fitzgerald (<greg@gregf.org>)
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
