@@ -12,7 +12,7 @@ describe 'collectd::_server_logfile' do
     expect(chef_run).to create_directory(collectd['log_dir']).with(
       user: 'root',
       group: 'root',
-      mode: '0755'
+      mode: 0755
     )
   end
 

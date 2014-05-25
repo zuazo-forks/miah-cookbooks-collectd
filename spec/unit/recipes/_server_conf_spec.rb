@@ -1,17 +1,15 @@
 require 'spec_helper'
 
 describe 'collectd::_server_conf' do
-  let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::Runner.new(platform: 'centos', version: '6.4').converge(described_recipe) }
   let(:collectd) { chef_run.node['collectd'] }
-  #let('sysconf') { '/etc/collectd' }
-  #let('plugconf') { '/etc/collectd/plugins' }
 
   it 'should create directories with permissions' do
     [collectd['sysconf_dir'], collectd['plugconf_dir']].each do |dir|
       expect(chef_run).to create_directory(dir).with(
         user: 'root',
         group: 'root',
-        mode: '0755'
+        mode: 0755
       )
     end
   end
@@ -21,7 +19,7 @@ describe 'collectd::_server_conf' do
       expect(chef_run).to create_template("#{collectd['sysconf_dir']}/#{file}.conf").with(
         user: 'root',
         group: 'root',
-        mode: '0644',
+        mode: 00644,
       )
     end
   end
