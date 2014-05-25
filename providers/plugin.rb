@@ -31,11 +31,11 @@ action :create do
     mode '0644'
     source(new_resource.template || "#{new_resource.type}_conf.erb")
     cookbook new_resource.template ? new_resource.cookbook_name.to_s : 'collectd'
-    variables({
+    variables(
                 :name => new_resource.name,
                 :modules => new_resource.modules,
                 :options => new_resource.options
-    })
+    )
     notifies :restart, 'service[collectd]', :delayed
   end
   new_resource.updated_by_last_action(true)

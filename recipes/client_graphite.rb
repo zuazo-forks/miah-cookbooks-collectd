@@ -38,13 +38,13 @@ end
 if node['collectd']['version'] =~ /5\.\d+/
   collectd_plugin 'write_graphite' do
     type 'write_graphite'
-    options({
+    options(
               :host => server,
               :port => 2003,
               :prefix => node['collectd']['graphite_prefix'],
               :escape_character => '_',
               :store_rates => false
-    })
+    )
   end
 else
   cookbook_file 'carbon_writer_py' do

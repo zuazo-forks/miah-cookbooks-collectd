@@ -22,5 +22,8 @@ LineLength:
 Documentation:
   Enabled: false
 
+Next:
+  Enabled: false
+
 HashSyntax:
   EnforcedStyle: hash_rockets
