@@ -36,7 +36,7 @@ action :create do
         Chef::Application.fatal!("Could not create authfile due to #{e}!")
       end
     end
-    not_if "grep -q '#{new_resource.username}:' #{new_resource.authfile}"
+    only_if { ::File.open(new_resource.authfile).grep(/#{new_resource.username}/).empty? }
   end
   new_resource.updated_by_last_action(c.updated_by_last_action?)
 end
