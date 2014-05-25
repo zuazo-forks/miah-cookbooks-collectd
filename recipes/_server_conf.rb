@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_recipe 'collectd::_server_service'
+
 sysconf = node['collectd']['sysconf_dir']
 plugconf = node['collectd']['plugconf_dir']
 

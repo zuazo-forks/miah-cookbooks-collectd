@@ -23,3 +23,4 @@ describe 'collectd::_install_from_package' do
     expect(chef_run).to install_package('collectd')
   end
 end
+

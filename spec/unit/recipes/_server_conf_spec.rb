@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'collectd::_server_conf' do
   let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
   let(:collectd) { chef_run.node['collectd'] }
+  #let('sysconf') { '/etc/collectd' }
+  #let('plugconf') { '/etc/collectd/plugins' }
 
   it 'should create directories with permissions' do
     [collectd['sysconf_dir'], collectd['plugconf_dir']].each do |dir|
