@@ -52,7 +52,7 @@ else
     path "#{ node['collectd']['plugin_dir'] }/carbon_writer.py"
     owner 'root'
     group 'root'
-    mode '0644'
+    mode 00644
   end
 
   collectd_plugin 'carbon_writer' do

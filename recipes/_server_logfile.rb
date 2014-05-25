@@ -22,7 +22,7 @@ log_file = "#{ node['collectd']['log_dir'] }/#{ node['collectd']['log_file'] }"
 directory node['collectd']['log_dir'] do
   owner 'root'
   group 'root'
-  mode '0755'
+  mode 00755
 end
 
 collectd_plugin 'logfile' do

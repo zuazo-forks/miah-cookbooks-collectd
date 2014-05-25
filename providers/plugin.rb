@@ -20,7 +20,7 @@ action :create do
     recursive true
     owner 'root'
     group 'root'
-    mode '0755'
+    mode 00755
     action :create
   end
 
@@ -28,7 +28,7 @@ action :create do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
     owner 'root'
     group 'root'
-    mode '0644'
+    mode 00644
     source(new_resource.template || "#{new_resource.type}_conf.erb")
     cookbook new_resource.template ? new_resource.cookbook_name.to_s : 'collectd'
     variables(
