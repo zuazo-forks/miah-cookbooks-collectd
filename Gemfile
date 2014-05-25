@@ -16,7 +16,7 @@ group :kitchen_common do
 end
 
 group :kitchen_cloud do
-  gem 'kitchen-digitalocean'
+  gem 'kitchen-digitalocean', :require => false
 end
 
 group :development do
