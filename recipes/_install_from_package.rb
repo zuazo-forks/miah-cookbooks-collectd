@@ -28,7 +28,7 @@ execute 'kill_collectdmon' do
   user 'root'
   action :nothing
   retries 6
-  only_if 'ps aux | grep collectdmo[n]'
+  only_if 'pgrep collectdmon'
 end
 
 service 'postinst_collectd_init' do
