@@ -20,7 +20,7 @@ else
   end
 end
 
-collectd_plugin "network" do
+collectd_plugin 'network' do
   options :server => servers
   type 'plugin'
 end

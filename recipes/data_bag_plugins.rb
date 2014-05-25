@@ -1,4 +1,4 @@
-include_recipe "collectd::client"
+include_recipe 'collectd::client'
 
 bag = node['collectd']['data_bag_name']
 
@@ -7,7 +7,7 @@ node['collectd']['plugins'].each do |instance|
 
   collectd_plugin instance do
     instance_data.each do |attribute, value|
-      send(attribute, value) unless attribute == "id"
+      send(attribute, value) unless attribute == 'id'
     end
   end
 end

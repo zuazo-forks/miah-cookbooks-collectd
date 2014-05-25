@@ -17,9 +17,9 @@
 
 case node['platform_family']
 when 'debian'
-  include_recipe "apt"
+  include_recipe 'apt'
 when 'rhel'
-  include_recipe "yum-epel"
+  include_recipe 'yum-epel'
 end
 
 # This is dirty. Race-Conditions suck.
@@ -28,7 +28,7 @@ execute 'kill_collectdmon' do
   user 'root'
   action :nothing
   retries 6
-  only_if "ps aux | grep collectdmo[n]"
+  only_if 'pgrep collectdmon'
 end
 
 service 'postinst_collectd_init' do
@@ -37,8 +37,8 @@ service 'postinst_collectd_init' do
   action :nothing
 end
 
-package "collectd" do
-  package_name "collectd"
+package 'collectd' do
+  package_name 'collectd'
   notifies :stop, 'service[postinst_collectd_init]', :immediately
   notifies :disable, 'service[postinst_collectd_init]', :immediately
   notifies :run, 'execute[kill_collectdmon]', :immediately

@@ -20,23 +20,23 @@ action :create do
     recursive true
     owner 'root'
     group 'root'
-    mode '0755'
+    mode 00755
     action :create
   end
 
   template new_resource.name do
     path "#{node['collectd']['plugconf_dir']}/#{new_resource.name}.conf"
-    owner "root"
-    group "root"
-    mode 0644
+    owner 'root'
+    group 'root'
+    mode 00644
     source(new_resource.template || "#{new_resource.type}_conf.erb")
     cookbook new_resource.template ? new_resource.cookbook_name.to_s : 'collectd'
-    variables({
-      :name => new_resource.name,
-      :modules => new_resource.modules,
-      :options => new_resource.options
-    })
-    notifies :restart, "service[collectd]", :delayed
+    variables(
+                :name => new_resource.name,
+                :modules => new_resource.modules,
+                :options => new_resource.options
+    )
+    notifies :restart, 'service[collectd]', :delayed
   end
   new_resource.updated_by_last_action(true)
 end

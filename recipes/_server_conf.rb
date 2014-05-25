@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_recipe 'collectd::_server_service'
+
 sysconf = node['collectd']['sysconf_dir']
 plugconf = node['collectd']['plugconf_dir']
 
@@ -21,7 +23,7 @@ plugconf = node['collectd']['plugconf_dir']
   directory dir do
     owner 'root'
     group 'root'
-    mode '0755'
+    mode 00755
     action :create
   end
 end
@@ -29,9 +31,9 @@ end
 %w(collectd thresholds).each do |file|
   template "#{sysconf}/#{file}.conf" do
     source "#{file}.conf.erb"
-    owner "root"
-    group "root"
-    mode 0644
-    notifies :restart, "service[collectd]", :delayed
+    owner 'root'
+    group 'root'
+    mode 00644
+    notifies :restart, 'service[collectd]', :delayed
   end
 end

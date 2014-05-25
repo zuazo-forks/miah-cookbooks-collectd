@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-include_recipe "collectd::client"
+include_recipe 'collectd::client'
 
 server = nil
 if Chef::Config[:solo]
@@ -28,37 +28,40 @@ elsif node['graphite']['server_role']
   Chef::Log.warn("node with role #{node['graphite']['server_role']} not found") unless server
 end
 
-server ||= node['graphite']['server_address']
-Chef::Log.warn("node.graphite.server_address not set. defaulting to 127.0.0.1") unless server
-server ||= "127.0.0.1"
+if node['graphite']
+  server = node['graphite']['server_address']
+else
+  Chef::Log.warn('node.graphite.server_address not set. defaulting to 127.0.0.1')
+  server = '127.0.0.1'
+end
 
 if node['collectd']['version'] =~ /5\.\d+/
   collectd_plugin 'write_graphite' do
-    type "write_graphite"
-    options({
-      :host => server,
-      :port => 2003,
-      :prefix => node['collectd']['graphite_prefix'],
-      :escape_character => "_",
-      :store_rates => false
-    })
+    type 'write_graphite'
+    options(
+              :host => server,
+              :port => 2003,
+              :prefix => node['collectd']['graphite_prefix'],
+              :escape_character => '_',
+              :store_rates => false
+    )
   end
 else
   cookbook_file 'carbon_writer_py' do
     source 'carbon_writer.py'
-    path   "#{ node['collectd']['plugin_dir'] }/carbon_writer.py"
-    owner  'root'
-    group  'root'
-    mode   0644
+    path "#{ node['collectd']['plugin_dir'] }/carbon_writer.py"
+    owner 'root'
+    group 'root'
+    mode 00644
   end
 
   collectd_plugin 'carbon_writer' do
     options :line_receiver_host => server,
-      :line_receiver_port => 2003,
-      :derive_counters => true,
-      :lowercase_metric_names => true,
-      :differentiate_counters_over_time => true,
-      'TypesDB' => node['collectd']['types_db']
+            :line_receiver_port => 2003,
+            :derive_counters => true,
+            :lowercase_metric_names => true,
+            :differentiate_counters_over_time => true,
+            :types_d_b => node['collectd']['types_db']
     type 'python'
   end
 end
