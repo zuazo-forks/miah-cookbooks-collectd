@@ -1,7 +1,5 @@
 ---
-driver_plugin: digitalocean
 driver_config:
-  flavor_id: 66
   require_chef_omnibus: latest
 
 platforms:
