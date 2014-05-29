@@ -1,3 +1,5 @@
+# Collectd [![Build Status](https://secure.travis-ci.org/miah/chef-collectd.png)](http://travis-ci.org/miah/chef-collectd)
+
 # DESCRIPTION #
 
 Configure and install the [collectd](http://collectd.org/) monitoring daemon.
