@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :lint do
   gem 'foodcritic', '~> 3.0'
-  gem 'rubocop', '~> 0.19'
+  gem 'rubocop', '= 0.23'
   gem 'rainbow', '< 2.0'
 end
 
@@ -21,7 +21,7 @@ end
 
 group :development do
   gem 'libnotify'
-  gem 'guard', '~> 2.5'
+  gem 'guard', '~> 2.6'
   gem 'guard-kitchen'
   gem 'guard-foodcritic'
   gem 'guard-rspec'
