@@ -50,8 +50,9 @@ default['collectd']['sbin_dir'] = '/usr/sbin'
 default['collectd']['log_dir'] = '/var/log/collectd/'
 
 ubuntu_precise = (node['platform'] == 'ubuntu' && node['platform_version'] == '12.04')
+debian_squeeze = (node['platform'] == 'debian' && node['platform_version'] >= '7.0')
 
-if node['kernel']['machine'] == 'x86_64' && !ubuntu_precise
+if node['kernel']['machine'] == 'x86_64' && !ubuntu_precise && !debian_squeeze
   default['collectd']['plugin_dir'] = '/usr/lib64/collectd'
 else
   default['collectd']['plugin_dir'] = '/usr/lib/collectd'

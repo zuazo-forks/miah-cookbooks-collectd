@@ -12,8 +12,8 @@ describe 'libraries::default' do
 
     data.each do |cookbook_option, plugin_key|
       it "generates collectd plugin key for cookbook option '#{cookbook_option}'" do
-        collectd_key(cookbook_option.to_sym).should == plugin_key
-        collectd_key(cookbook_option.to_s).should == plugin_key
+        expect(collectd_key(cookbook_option.to_sym)).to eq(plugin_key)
+        expect(collectd_key(cookbook_option.to_s)).to eq(plugin_key)
       end
     end
   end
