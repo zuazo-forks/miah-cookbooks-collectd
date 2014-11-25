@@ -1,4 +1,4 @@
-# Collectd [![Build Status](https://secure.travis-ci.org/miah/chef-collectd.png)](http://travis-ci.org/miah/chef-collectd)
+# Collectd [![Build Status](http://img.shields.io/travis/onddo/miah-cookbooks-collectd.svg?style=flat)](https://travis-ci.org/onddo/miah-cookbooks-collectd)
 
 # DESCRIPTION #
 
