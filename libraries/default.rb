@@ -27,7 +27,7 @@ def collectd_key(option)
     Chef::Log.warn("#{message1} #{message2}")
   end
   if has_underscore
-    string_option.split('_').map { |x| x.capitalize }.join
+    string_option.split('_').map(&:capitalize).join
   elsif !has_upper_case
     string_option.capitalize
   else
@@ -40,56 +40,69 @@ def collectd_option(option)
   "\"#{ option }\""
 end
 
-def collectd_settings(options, level = 0)
+def collectd_option_key_value(key, value, level)
   indent = '  ' * level
-  output = []
-  options.each_pair do |key, value|
-    if value.is_a? Array
-      value.each do |subvalue|
-        output << "#{ indent }#{ collectd_key(key)} #{ collectd_option(subvalue) }"
-      end
-    elsif value.is_a? Hash
-      value.each_pair do |name, suboptions|
-        output << <<-CFG
+  if value.is_a? Array
+    value.each_with_object([]) do |subvalue, output|
+      output <<
+        "#{ indent }#{ collectd_key(key)} #{ collectd_option(subvalue) }"
+    end.join("\n")
+  elsif value.is_a? Hash
+    value.each_pair do |name, suboptions|
+      <<-CFG
 #{ indent }<#{ key } \"#{ name }\">
 #{ collectd_settings(suboptions, level + 1) }
 #{ indent }</#{ key }>
 CFG
-      end
-    else
-      output << "#{ indent }#{ collectd_key(key) } #{ collectd_option(value) }"
     end
+  else
+    "#{ indent }#{ collectd_key(key) } #{ collectd_option(value) }"
+  end
+end
+
+def collectd_settings(options, level = 0)
+  output = []
+  options.each_pair do |key, value|
+    output << collectd_option_key_value(key, value, level)
   end
   output.join("\n")
 end
 
-def collectd_plugin_settings(options, level = 0, overide_hash = false)
-  indent = '  ' * level
-  output = []
-  options.each_pair do |key, value|
-    if value.is_a? Array
-      value.each do |subvalue|
-        output << <<-CFG
-#{ indent }<#{ collectd_key(key) }>
-#{ collectd_plugin_settings(subvalue, level + 1, true) }
-#{ indent }</#{ collectd_key(key) }>
-CFG
-      end
-    elsif value.is_a? Hash
-      value.each_pair do |name, suboptions|
-        if overide_hash
-          output << "#{ indent }#{ collectd_key(name) } #{ collectd_option(suboptions) }"
-        else
-          output << <<-CFG
+def collectd_plugin_suboption(value, level, override_hash)
+  value.each_pair do |name, suboptions|
+    if override_hash
+      "#{ indent }#{ collectd_key(name) } #{ collectd_option(suboptions) }"
+    else
+      <<-CFG
 #{ indent }<#{ collectd_key(key) } \"#{ name }\">
 #{ collectd_plugin_settings(suboptions, level + 1) }
 #{ indent }</#{ collectd_key(key) }>
 CFG
-        end
-      end
-    else
-      output << "#{ indent }#{ collectd_key(key) } #{ collectd_option(value) }"
     end
+  end
+end
+
+def collectd_plugin_option(key, value, level, override_hash)
+  indent = '  ' * level
+  if value.is_a? Array
+    value.each_with_object([]) do |subvalue, output|
+      output << <<-CFG
+#{ indent }<#{ collectd_key(key) }>
+#{ collectd_plugin_settings(subvalue, level + 1, true) }
+#{ indent }</#{ collectd_key(key) }>
+CFG
+    end.join("\n")
+  elsif value.is_a? Hash
+    collectd_plugin_suboption(value, level, override_hash)
+  else
+    "#{ indent }#{ collectd_key(key) } #{ collectd_option(value) }"
+  end
+end
+
+def collectd_plugin_settings(options, level = 0, override_hash = false)
+  output = []
+  options.each_pair do |key, value|
+    output << collectd_plugin_option(key, value, level, override_hash)
   end
   output.join("\n")
 end
