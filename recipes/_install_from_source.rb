@@ -47,5 +47,5 @@ ark 'collectd' do
   prefix_root node['collectd']['prefix_dir']
   path node['collectd']['src_dir']
   creates "#{node['collectd']['sbin_dir']}/collectd"
-  action [:configure, :install_with_make]
+  action :install_with_make
 end
